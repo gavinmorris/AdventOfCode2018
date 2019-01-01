@@ -1,23 +1,24 @@
 #! /usr/bin/python3
 
-def whatIsFrequency(filepath, frequency):
-    with open(filepath) as fp:
+frequencies = []
+with open( "./input.txt") as fp:
+    line = fp.readline()
+    while line:
+        frequencies.append(int(line.strip()))
         line = fp.readline()
-        while line:
-            newValue = int(line)
-            frequency = changeFrequency(newValue, frequency)
-            line = fp.readline()
-    fp.close()
-    return frequency
+fp.close()
+print(sum(frequencies))
 
+freqSet = set()
+curr = frequencies[0]
+i = 0
+#keep looping until a vlaue is found the set
+while curr not in freqSet:
+    freqSet.add(curr)
+    if i == len(frequencies) - 1: 
+        i = 0
+    else:
+        i+=1
+    curr += frequencies[i]
 
-def changeFrequency(newValue, currFrequency):
-    newFrequency = currFrequency + newValue
-    print(frequencyChangeMessage(newValue, currFrequency, newFrequency))
-    return newFrequency
-
-def frequencyChangeMessage(currFrequency, newValue, newFrequency):
-    return "Current frequency  "+str(currFrequency)+", change of "+str(newValue)+"; resulting frequency " + str(newFrequency) +"."
-
-
-print(whatIsFrequency("./input.txt", 0))
+print(curr)
