@@ -1,5 +1,5 @@
 #! /usr/bin/python3
-
+import operator
 def part1():
     with open("input.txt", "r") as fp:
         two = 0
@@ -33,6 +33,26 @@ def howManyChars(boxCode):
     else:
         return 1
 
+def part2():
+    codes = []
+    with open("input.txt", "r") as fp:
+        for line in fp:
+            codes.append(line.strip())        
 
-
+        for fs in codes:
+            for ss in codes:
+                diff = 0
+                for i in range(len(fs)):
+                    if fs[i] != ss[i]:
+                        diff += 1
+                if diff == 1:
+                    print fs, ss
+                    result = []
+                    for j in range(len(fs)):
+                        if fs[j] == ss[j]:
+                            result.append(fs[j])
+                    return "".join(result)
+                
+              
 print part1()
+print part2()
